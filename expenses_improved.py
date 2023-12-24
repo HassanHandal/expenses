@@ -2,6 +2,7 @@ import requests
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
+from api import api
 amount_list = []
 currency_list = []
 category_list = []
@@ -46,7 +47,7 @@ def add_expense():
         url = f"https://api.apilayer.com/fixer/convert?to={to_curr}&from={from_curr}&amount={amount}"
 
         headers = {
-                "apikey": "DMunyZazMOy2HKxKCkh7EfRSWdOtyoX3"
+                "apikey": api()
             }
 
         response = requests.get(url, headers=headers)

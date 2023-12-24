@@ -2,7 +2,7 @@ import requests
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
-
+from api import api
 amount_list = []
 currency_list = []
 category_list = []
@@ -26,7 +26,7 @@ def not_select(text):
 def convert_currency(amount, from_currency, to_currency):
     url = f"https://api.apilayer.com/fixer/convert?to={to_currency}&from={from_currency}&amount={amount}"
     headers = {
-        "apikey": "DMunyZazMOy2HKxKCkh7EfRSWdOtyoX3"
+        "apikey": api()
     }
 
     try:
