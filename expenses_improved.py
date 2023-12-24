@@ -7,6 +7,7 @@ currency_list = []
 category_list = []
 payment_list = []
 date_list = []
+sum_usd = []
 def show_error_message(message):
     error_label.config(text=message)
 
@@ -37,22 +38,23 @@ def add_expense():
         category_list.append(t3)
         payment_list.append(t4)
         date_list.append(t5)
-        total_amount = 0
-        for b in range(len(amount_list)):
-            from_curr = currency_list[b]
-            to_curr = "USD"
-            amount = amount_list[b]
-            url = f"https://api.apilayer.com/fixer/convert?to={to_curr}&from={from_curr}&amount={amount}"
+        
+        
+        from_curr = currency_list[len(currency_list)-1]
+        to_curr = "USD"
+        amount = amount_list[len(amount_list)-1]
+        url = f"https://api.apilayer.com/fixer/convert?to={to_curr}&from={from_curr}&amount={amount}"
 
-            headers = {
+        headers = {
                 "apikey": "DMunyZazMOy2HKxKCkh7EfRSWdOtyoX3"
             }
 
-            response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers)
 
-            status_code = response.status_code
-            result = response.json()
-            total_amount += round(float(result["result"]),2)
+        status_code = response.status_code
+        result = response.json()
+        sum_usd.append(round(float(result["result"]),2))
+        total_amount = sum(sum_usd)
         amount_list.append(round(float(total_amount),2))
         currency_list.append("USD")
         for item in tree.get_children():
